@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SearchButton from '../components/SearchButton';
+import NumberOfPodcasts from '../components/NumberOfPodcasts';
 import Header from "../components/Header";
 
 function HomePage() {
@@ -11,19 +12,23 @@ function HomePage() {
   useEffect(() => {
     const fetchPodcasts = async () => {
       const targetUrl = encodeURIComponent("https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json");
-      const response = await fetch(`https://api.allorigins.win/get?url=${targetUrl}`);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      try {
+        const response = await fetch(`https://api.allorigins.win/get?url=${targetUrl}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        const parsedData = JSON.parse(data.contents);
+        setPodcasts(parsedData.feed.entry);
+        setLoading(false);
+      } catch (error) {
+        console.error('There was an error!', error);
       }
-      const data = await response.json();
-      const parsedData = JSON.parse(data.contents);
-      setPodcasts(parsedData.feed.entry);
-      setLoading(false);
     };
-    
+      
     fetchPodcasts();
   }, []);
-
+  
   const handleSearch = (search) => {
     setSearchTerm(search);
   }
@@ -39,6 +44,7 @@ function HomePage() {
   return (
     <div>
       <Header />
+      <NumberOfPodcasts podcastsCount={filteredPodcasts.length} />
       <SearchButton onSearch={handleSearch} />
       <div className="podcast-grid">
         {filteredPodcasts.map((podcast) => (
@@ -46,7 +52,7 @@ function HomePage() {
             <div className="podcast-box">
               <img src={podcast['im:image'][2].label} alt={podcast.title.label} />
               <h2>{podcast.title.label}</h2>
-              <p>Author: {podcast['im:artist']?.label}</p>
+              <p>Author: {podcast['im:artist'].label}</p>
             </div>
           </Link>
         ))}
