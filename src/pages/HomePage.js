@@ -46,7 +46,7 @@ function HomePage() {
             <div className="podcast-box">
               <img src={podcast['im:image'][2].label} alt={podcast.title.label} />
               <h2>{podcast.title.label}</h2>
-              <p>Author: {podcast['im:artist'].label}</p>
+              <p>Author: {podcast['im:artist']?.label}</p>
             </div>
           </Link>
         ))}
