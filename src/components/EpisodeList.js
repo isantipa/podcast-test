@@ -16,7 +16,7 @@ function formatDuration(duration) {
 function formatDate(dateString) {
   const date = new Date(dateString);
   const day = date.getDate();
-  const month = date.getMonth() + 1; // Los meses en JavaScript son base 0
+  const month = date.getMonth() + 1;
   const year = date.getFullYear();
 
   return `${day}/${month}/${year}`;
