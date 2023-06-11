@@ -1,0 +1,30 @@
+.table-container {
+    border: 1px solid lightgray;
+    text-align: left;
+    width: 85%;
+    box-shadow: -2px 2px 5px rgba(0,0,0,0.1),
+                 2px 2px 5px rgba(0,0,0,0.1),
+                 0 4px 5px rgba(0,0,0,0.2);
+    margin: 1em;
+    border-radius: 2%;
+}
+  
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+  
+.table-container th,
+.table-container td {
+    padding: 0.5em;
+    border-bottom: 1px solid lightgray;
+}
+  
+.table-container tr:nth-child(even) {
+    background-color: #f0f0f0;
+}
+  
+.table-container td:last-child {
+    text-align: right;
+}
+  

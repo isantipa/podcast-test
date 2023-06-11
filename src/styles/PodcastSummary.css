@@ -9,6 +9,7 @@
     box-shadow: -2px 2px 5px rgba(0,0,0,0.1),
                  2px 2px 5px rgba(0,0,0,0.1),
                  0 4px 5px rgba(0,0,0,0.2);
+    margin: 0 auto;
 }
 
 .podcast-summary-container img {

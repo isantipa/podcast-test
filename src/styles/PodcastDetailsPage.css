@@ -1,0 +1,31 @@
+.page-container {
+    display: flex;
+    flex-direction: column; 
+    padding: 20px;
+    justify-content: center; 
+    align-items: center; 
+  }
+  
+  .summary-container,
+  .episode-container {
+    width: 100%;
+  }
+  
+  @media screen and (min-width: 768px) {
+    .page-container {
+      flex-direction: row;
+      justify-content: flex-start; 
+      align-items: flex-start;
+    }
+  
+    .summary-container {
+      flex-basis: 30%;
+      margin-right: 20px; 
+    }
+  
+    .episode-container {
+      flex-basis: 70%;
+    
+    }
+  }
+  

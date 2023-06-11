@@ -1,0 +1,14 @@
+.episode-count-container {
+    border: 1px solid lightgray;
+    text-align: left;
+    width: 85%;
+    box-shadow: -2px 2px 5px rgba(0,0,0,0.1),
+                 2px 2px 5px rgba(0,0,0,0.1),
+                 0 4px 5px rgba(0,0,0,0.2);
+    margin: 0 1em;
+    border-radius: 2%;
+}
+
+.episode-count-container h2{
+    margin: 0.4em 0.5em;
+}
