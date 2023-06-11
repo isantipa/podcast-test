@@ -10,6 +10,7 @@ function HomePage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
 
+
   useEffect(() => {
     const fetchPodcasts = async () => {
       const lastFetch = localStorage.getItem('lastFetch');
@@ -62,15 +63,25 @@ function HomePage() {
         <SearchButton onSearch={handleSearch} />
       </div>
       <div className="podcast-grid">
-        {filteredPodcasts.map((podcast) => (
-          <Link to={`/podcast/${podcast.id.attributes['im:id']}`} key={podcast.id.attributes['im:id']}>
-            <div className="podcast-box">
-              <img src={podcast['im:image'][2].label} alt={podcast.title.label} />
-              <h2>{podcast.title.label}</h2>
-              <p>Author: {podcast['im:artist'].label}</p>
-            </div>
-          </Link>
-        ))}
+        {filteredPodcasts.map((podcast) => {
+          const title = podcast.title.label.split(' - ')[0];
+          return (
+            <Link 
+              to={{
+                pathname: `/podcast/${podcast.id.attributes['im:id']}`,
+                state: { podcast }
+              }} 
+              key={podcast.id.attributes['im:id']} 
+              style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+              <div className="podcast-box">
+                <img src={podcast['im:image'][2].label} alt={podcast.title.label} />
+                <h2>{title}</h2>
+                <p>Author: {podcast['im:artist'].label}</p>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
