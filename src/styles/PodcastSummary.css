@@ -25,11 +25,12 @@
 }
 .podcast-details h3 {
     margin-bottom: 0;
+    font-family: Helvetica, sans-serif;
 }
 .podcast-details p {
     color: rgb(80, 80, 80);
-    font-weight: bold;
     margin-top: 0;
+    font-family: Helvetica, sans-serif;
     font-style: italic;
 }
 
@@ -37,12 +38,13 @@
     text-align: left;
 }
 .podcast-description h4{
-    color: rgb(30, 30, 30);
+    font-weight: bold;
+    font-size: 1.1em;
     margin-bottom: 0;
 }
 .podcast-description p{
     color: rgb(80, 80, 80);
     font-weight: bold;
-    margin-top: 0;
+    margin-top: 0.2em;
     font-style: italic;
 }

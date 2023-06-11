@@ -11,4 +11,6 @@
 
 .episode-count-container h2{
     margin: 0.4em 0.5em;
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
 }

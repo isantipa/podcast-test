@@ -19,6 +19,12 @@
 .table-container td {
     padding: 0.5em;
     border-bottom: 1px solid lightgray;
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 0.8em;
+}
+.table-container td {
+    color: rgb(105, 105, 105);
 }
   
 .table-container tr:nth-child(even) {
@@ -37,6 +43,7 @@
     color: rgb(65, 125, 171);
     text-decoration: none;
     font-weight: bold;
+    font-family: Helvetica, sans-serif;
 }
 .table-container a:hover{
     color: rgb(52, 106, 147);

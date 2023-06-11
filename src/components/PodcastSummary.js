@@ -9,7 +9,7 @@ function PodcastSummary({ podcast }) {
             <img src={podcast['im:image'][2].label} alt={podcast.title.label} />
             <div className="podcast-details">
                 <h3>{title}</h3>
-                <p>by: {podcast['im:artist'].label}</p>
+                <p>by {podcast['im:artist'].label}</p>
             </div>
             <div className="podcast-description">
                 <h4>Description:</h4>
