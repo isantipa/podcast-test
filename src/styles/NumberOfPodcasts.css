@@ -1,0 +1,12 @@
+.numberofpodcasts-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25%;
+    margin: 1.5em 0;
+    padding: 0 5px;
+    color: white;
+    background-color: rgb(55, 113, 158);
+    font-weight: bolder;
+    font-size: 1.2em;
+}

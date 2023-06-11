@@ -1,0 +1,15 @@
+.header{
+    padding: 0.1em;
+    background-color: white;
+    border-bottom: 1px solid lightgray;
+}
+
+.header a{
+    text-decoration: none;
+    text-transform: capitalize;
+    color: rgb(55, 113, 158);
+}
+
+.header a:hover{
+    color: rgb(47, 91, 124);
+}

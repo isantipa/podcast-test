@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import SearchButton from '../components/SearchButton';
 import NumberOfPodcasts from '../components/NumberOfPodcasts';
 import Header from "../components/Header";
+import "../styles/HomePage.css";
 
 function HomePage() {
   const [podcasts, setPodcasts] = useState([]);
@@ -11,18 +12,30 @@ function HomePage() {
 
   useEffect(() => {
     const fetchPodcasts = async () => {
-      const targetUrl = encodeURIComponent("https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json");
-      try {
-        const response = await fetch(`https://api.allorigins.win/get?url=${targetUrl}`);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+      const lastFetch = localStorage.getItem('lastFetch');
+
+      if (!lastFetch || Date.now() - lastFetch > 24 * 60 * 60 * 1000) {
+        const targetUrl = encodeURIComponent("https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json");
+        try {
+          const response = await fetch(`https://api.allorigins.win/get?url=${targetUrl}`);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const data = await response.json();
+          const parsedData = JSON.parse(data.contents);
+          localStorage.setItem('podcastsData', JSON.stringify(parsedData.feed.entry));
+          localStorage.setItem('lastFetch', Date.now());
+          setPodcasts(parsedData.feed.entry);
+          setLoading(false);
+        } catch (error) {
+          console.error('There was an error!', error);
         }
-        const data = await response.json();
-        const parsedData = JSON.parse(data.contents);
-        setPodcasts(parsedData.feed.entry);
-        setLoading(false);
-      } catch (error) {
-        console.error('There was an error!', error);
+      } else {
+        const storedData = localStorage.getItem('podcastsData');
+        if (storedData) {
+          setPodcasts(JSON.parse(storedData));
+          setLoading(false);
+        }
       }
     };
       
@@ -44,8 +57,10 @@ function HomePage() {
   return (
     <div>
       <Header />
-      <NumberOfPodcasts podcastsCount={filteredPodcasts.length} />
-      <SearchButton onSearch={handleSearch} />
+      <div className="number-search-container">
+        <NumberOfPodcasts podcastsCount={filteredPodcasts.length} />
+        <SearchButton onSearch={handleSearch} />
+      </div>
       <div className="podcast-grid">
         {filteredPodcasts.map((podcast) => (
           <Link to={`/podcast/${podcast.id.attributes['im:id']}`} key={podcast.id.attributes['im:id']}>

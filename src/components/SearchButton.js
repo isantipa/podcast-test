@@ -10,7 +10,7 @@ function SearchButton({ onSearch }) {
         <div className="search">
             <input 
                 type="text"
-                placeholder="Buscar podcast..."
+                placeholder="Filter podcast..."
                 onChange={handleInputChange}
             />
         </div>

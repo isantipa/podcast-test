@@ -1,7 +1,8 @@
 import React from 'react';
+import "../styles/NumberOfPodcasts.css"
 
 const NumberOfPodcasts = ({ podcastsCount }) => {
-  return <div>{podcastsCount}</div>;
+  return <div className='numberofpodcasts-container'>{podcastsCount}</div>;
 };
 
 export default NumberOfPodcasts;
