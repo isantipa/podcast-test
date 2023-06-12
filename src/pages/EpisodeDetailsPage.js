@@ -62,7 +62,7 @@ function EpisodeDetailsPage() {
           <PodcastSummary podcast={currentPodcast} />
         </div>
         <div className='episode-container'>
-          <h1>{episode.trackName}</h1>
+          <h2>{episode.trackName}</h2>
           <p>{episode.description}</p>
           <audio controls src={episode.previewUrl}>
             Your browser does not suppor the audio element.

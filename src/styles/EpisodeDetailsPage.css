@@ -1,0 +1,27 @@
+.episode-container {
+    border: 1px solid lightgray;
+    border-radius: 2%;
+    padding: 1em 2em;
+    height: auto;
+    width: 200px;
+    margin: 1em 1em;
+    box-shadow: -2px 2px 5px rgba(0,0,0,0.1),
+                 2px 2px 5px rgba(0,0,0,0.1),
+                 0 4px 5px rgba(0,0,0,0.2);
+    margin: 0 auto;
+    font-family: Helvetica, sans-serif;
+}
+
+.episode-container h2 {
+    margin-bottom: 0;
+}
+
+.episode-container p {
+    font-weight: bold;
+    font-style: italic;
+    color: rgb(80, 80, 80);
+}
+
+.episode-container audio {
+
+}
