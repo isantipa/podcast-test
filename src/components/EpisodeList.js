@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/EpisodeList.css'
 
 function formatDuration(duration) {
@@ -22,7 +23,7 @@ function formatDate(dateString) {
   return `${day}/${month}/${year}`;
 }
 
-function EpisodeList({ episodes }) {
+function EpisodeList({ episodes, podcastId }) {
   return (
     <div className='table-container'>
     <table>
@@ -37,7 +38,7 @@ function EpisodeList({ episodes }) {
         {episodes.map((episode) => (
           <tr key={episode.trackId}>
             <td>
-              <a href={`/episode/${episode.trackId}`}>{episode.trackName}</a>
+              <Link to={`/podcast/${podcastId}/episode/${episode.trackId}`}>{episode.trackName}</Link>
             </td>
             <td>{formatDate(episode.releaseDate)}</td>
             <td>{formatDuration(episode.trackTimeMillis / 1000)}</td>

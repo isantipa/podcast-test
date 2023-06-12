@@ -10,7 +10,6 @@ function HomePage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
 
-
   useEffect(() => {
     const fetchPodcasts = async () => {
       const lastFetch = localStorage.getItem('lastFetch');
@@ -23,11 +22,17 @@ function HomePage() {
             throw new Error(`HTTP error! status: ${response.status}`);
           }
           const data = await response.json();
-          const parsedData = JSON.parse(data.contents);
-          localStorage.setItem('podcastsData', JSON.stringify(parsedData.feed.entry));
-          localStorage.setItem('lastFetch', Date.now());
-          setPodcasts(parsedData.feed.entry);
-          setLoading(false);
+          console.log(data);
+
+          if (data && data.contents) {
+            const parsedData = JSON.parse(data.contents);
+            localStorage.setItem('podcastsData', JSON.stringify(parsedData.feed.entry));
+            localStorage.setItem('lastFetch', Date.now());
+            setPodcasts(parsedData.feed.entry);
+            setLoading(false);
+          } else {
+            throw new Error('API response is missing contents');
+          }
         } catch (error) {
           console.error('There was an error!', error);
         }
@@ -52,7 +57,7 @@ function HomePage() {
   );
 
   if (loading) {
-    return <p>Cargando podcasts...</p>;
+    return <p>Loading podcasts...</p>;
   }
 
   return (
