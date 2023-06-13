@@ -7,7 +7,7 @@
   }
   
   .summary-container,
-  .episode-container {
+  .episodes-container {
     width: 100%;
   }
   
@@ -25,7 +25,6 @@
   
     .episode-container {
       flex-basis: 70%;
-    
     }
   }
   

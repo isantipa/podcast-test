@@ -12,7 +12,7 @@ function formatDuration(duration) {
   } else {
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   }
-}
+};
 
 function formatDate(dateString) {
   const date = new Date(dateString);
@@ -21,7 +21,7 @@ function formatDate(dateString) {
   const year = date.getFullYear();
 
   return `${day}/${month}/${year}`;
-}
+};
 
 function EpisodeList({ episodes, podcastId }) {
   return (
@@ -48,6 +48,6 @@ function EpisodeList({ episodes, podcastId }) {
     </table>
     </div>
   );
-}
+};
 
 export default EpisodeList;

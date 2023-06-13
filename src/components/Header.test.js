@@ -8,7 +8,7 @@ test('Check if the header renders correctly', () => {
       <Header />
     </Router>
   );
-  
+
   const headerElement = screen.getByRole('link', { name: /podcaster/i });
   expect(headerElement).toBeInTheDocument();
   expect(headerElement.getAttribute('href')).toBe('/');

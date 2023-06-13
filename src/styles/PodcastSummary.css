@@ -26,6 +26,12 @@
 .podcast-details h3 {
     margin-bottom: 0;
     font-family: Helvetica, sans-serif;
+    color: rgb(80, 80, 80);
+    text-decoration: none;
+}
+.podcast-details h3:hover {
+    color: black;
+    background-color: lightgray;
 }
 .podcast-details p {
     color: rgb(80, 80, 80);

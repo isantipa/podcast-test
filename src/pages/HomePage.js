@@ -80,7 +80,9 @@ function HomePage() {
               style={{ textDecoration: 'none', color: 'inherit' }}
             >
               <div className="podcast-box">
-                <img src={podcast['im:image'][2].label} alt={podcast.title.label} />
+                <div className="image-container">
+                  <img src={podcast['im:image'][2].label} alt={podcast.title.label} />
+                </div>
                 <h2>{title}</h2>
                 <p>Author: {podcast['im:artist'].label}</p>
               </div>

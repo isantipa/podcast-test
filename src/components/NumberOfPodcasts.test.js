@@ -9,3 +9,4 @@ test('Check if NumberOfPodcast renders and shows the correct number of podcast',
   const countElement = screen.getByText(numberOfPodcasts.toString());
   expect(countElement).toBeInTheDocument();
 });
+

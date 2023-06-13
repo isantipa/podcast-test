@@ -52,7 +52,7 @@ function PodcastDetailsPage() {
         <div className='summary-container'>
           <PodcastSummary podcast={podcast} />
         </div>
-        <div className='episode-container'>
+        <div className='episodes-container'>
           <EpisodeCount count={episodeCount} />
           <EpisodeList episodes={episodes} podcastId={podcastId} />
         </div>
