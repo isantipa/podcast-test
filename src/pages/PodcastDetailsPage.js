@@ -5,6 +5,7 @@ import PodcastSummary from '../components/PodcastSummary';
 import EpisodeCount from '../components/EpisodeCount';
 import EpisodeList from '../components/EpisodeList';
 import '../styles/PodcastDetailsPage.css';
+import LoadingSign from '../components/LoadingSign';
 
 function PodcastDetailsPage() {
   const { podcastId } = useParams();
@@ -44,10 +45,8 @@ function PodcastDetailsPage() {
   if (!podcast) {
     return (
       <div>
-      <Header />
-      <div className="loader-container">
-        <div className="loader"></div>
-      </div>
+        <Header />
+        <LoadingSign />
       </div>
     );
   }

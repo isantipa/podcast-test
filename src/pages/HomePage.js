@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import SearchButton from '../components/SearchButton';
 import NumberOfPodcasts from '../components/NumberOfPodcasts';
 import Header from "../components/Header";
+import LoadingSign from "../components/LoadingSign";
 import "../styles/HomePage.css";
 
 function HomePage() {
@@ -60,9 +61,7 @@ function HomePage() {
     return (
       <div>
         <Header />
-        <div className="loader-container">
-          <div className="loader"></div>
-        </div>
+        <LoadingSign />
       </div>
     );
   }

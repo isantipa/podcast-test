@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import PodcastSummary from '../components/PodcastSummary';
+import LoadingSign from '../components/LoadingSign';
 import '../styles/EpisodeDetailsPage.css';
 
 function EpisodeDetailsPage() {
@@ -54,9 +55,7 @@ function EpisodeDetailsPage() {
     return (
       <div>
         <Header />
-        <div className="loader-container">
-          <div className="loader"></div>
-        </div>
+        <LoadingSign />
       </div>
     );
   }
@@ -70,7 +69,7 @@ function EpisodeDetailsPage() {
         </div>
         <div className='episode-container'>
           <h2>{episode.trackName}</h2>
-          <p>{episode.description}</p>
+          <p dangerouslySetInnerHTML={{ __html: episode.description }} />
           <audio controls src={episode.previewUrl}>
             Your browser does not suppor the audio element.
           </audio>

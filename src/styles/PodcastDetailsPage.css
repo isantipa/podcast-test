@@ -4,46 +4,26 @@
     padding: 20px;
     justify-content: center; 
     align-items: center; 
-  }
+}
   
-  .summary-container,
-  .episodes-container {
+.summary-container,
+.episodes-container {
     width: 100%;
+}
+  
+@media screen and (min-width: 768px) {
+  .page-container {
+    flex-direction: row;
+    justify-content: flex-start; 
+    align-items: flex-start;
   }
   
-  @media screen and (min-width: 768px) {
-    .page-container {
-      flex-direction: row;
-      justify-content: flex-start; 
-      align-items: flex-start;
-    }
-  
-    .summary-container {
-      flex-basis: 30%;
-      margin-right: 20px; 
-    }
-  
-    .episode-container {
-      flex-basis: 70%;
-    }
-  }
-
-  @keyframes spinner {
-    to {transform: rotate(360deg);}
+  .summary-container {
+    flex-basis: 30%;
+    margin-right: 20px; 
   }
   
-  .loader-container {
-    text-align: right;
-    margin: 3em 3em;
+  .episode-container {
+    flex-basis: 70%;
   }
-  
-  .loader {
-    display: inline-block;
-    border: 10px solid #f3f3f3; 
-    border-top: 10px solid #3498db; 
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    animation: spinner 2s linear infinite;
-  }
-  
+}
