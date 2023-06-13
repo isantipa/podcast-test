@@ -27,4 +27,23 @@
       flex-basis: 70%;
     }
   }
+
+  @keyframes spinner {
+    to {transform: rotate(360deg);}
+  }
+  
+  .loader-container {
+    text-align: right;
+    margin: 3em 3em;
+  }
+  
+  .loader {
+    display: inline-block;
+    border: 10px solid #f3f3f3; 
+    border-top: 10px solid #3498db; 
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spinner 2s linear infinite;
+  }
   

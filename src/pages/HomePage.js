@@ -57,7 +57,14 @@ function HomePage() {
   );
 
   if (loading) {
-    return <p>Loading podcasts...</p>;
+    return (
+      <div>
+        <Header />
+        <div className="loader-container">
+          <div className="loader"></div>
+        </div>
+      </div>
+    );
   }
 
   return (

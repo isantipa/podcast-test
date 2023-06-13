@@ -42,7 +42,14 @@ function PodcastDetailsPage() {
   }, [podcastId]);
 
   if (!podcast) {
-    return <p>Loading...</p>;
+    return (
+      <div>
+      <Header />
+      <div className="loader-container">
+        <div className="loader"></div>
+      </div>
+      </div>
+    );
   }
 
   return (
