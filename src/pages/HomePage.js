@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import SearchButton from '../components/SearchButton';
 import NumberOfPodcasts from '../components/NumberOfPodcasts';
@@ -8,13 +8,15 @@ import "../styles/HomePage.css";
 
 function HomePage() {
   const [podcasts, setPodcasts] = useState([]);
+  const [filteredPodcasts, setFilteredPodcasts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchPodcasts = async () => {
       const lastFetch = localStorage.getItem('lastFetch');
-
+      // If it's been more than a day since the last fetch, fetch data again
       if (!lastFetch || Date.now() - lastFetch > 24 * 60 * 60 * 1000) {
         const targetUrl = encodeURIComponent("https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json");
         try {
@@ -25,37 +27,42 @@ function HomePage() {
           const data = await response.json();
           console.log(data);
 
+           // Parse and store data in localStorage, also store the fetch time
           if (data && data.contents) {
             const parsedData = JSON.parse(data.contents);
             localStorage.setItem('podcastsData', JSON.stringify(parsedData.feed.entry));
             localStorage.setItem('lastFetch', Date.now());
             setPodcasts(parsedData.feed.entry);
+            setFilteredPodcasts(parsedData.feed.entry);
             setLoading(false);
           } else {
             throw new Error('API response is missing contents');
           }
         } catch (error) {
+          setError('There was an error! ' + error);
           console.error('There was an error!', error);
         }
       } else {
         const storedData = localStorage.getItem('podcastsData');
         if (storedData) {
-          setPodcasts(JSON.parse(storedData));
+          const podcastsData = JSON.parse(storedData);
+          setPodcasts(podcastsData);
+          setFilteredPodcasts(podcastsData);
           setLoading(false);
         }
       }
     };
-      
+
     fetchPodcasts();
   }, []);
-  
-  const handleSearch = (search) => {
-    setSearchTerm(search);
-  }
 
-  const filteredPodcasts = podcasts.filter((podcast) =>
-    podcast.title.label.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Perform filtering only when search term changes
+  const handleSearch = useCallback((search) => { 
+    setSearchTerm(search);
+    setFilteredPodcasts(podcasts.filter((podcast) =>
+      podcast.title.label.toLowerCase().includes(search.toLowerCase())
+    ));
+  }, [podcasts]);
 
   if (loading) {
     return (

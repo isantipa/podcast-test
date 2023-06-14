@@ -3,9 +3,9 @@ import "../styles/LoadingSign.css"
 
 function LoadingSign() {
     return (
-        <div className="loader-container">
-          <div className="loader"></div>
-        </div>
+      <div className="loader-container" data-testid="loader-container">
+        <div className="loader" data-testid="loader"></div>
+      </div>
     )
 }
 

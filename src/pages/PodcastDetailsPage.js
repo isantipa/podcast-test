@@ -4,8 +4,8 @@ import Header from '../components/Header';
 import PodcastSummary from '../components/PodcastSummary';
 import EpisodeCount from '../components/EpisodeCount';
 import EpisodeList from '../components/EpisodeList';
+import Loading from '../components/Loading';
 import '../styles/PodcastDetailsPage.css';
-import LoadingSign from '../components/LoadingSign';
 
 function PodcastDetailsPage() {
   const { podcastId } = useParams();
@@ -16,13 +16,12 @@ function PodcastDetailsPage() {
   useEffect(() => {
     const fetchPodcastData = async () => {
       try {
-        const response = await fetch('https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json');
+        const response = await fetch(`https://itunes.apple.com/lookup?id=${podcastId}&media=podcast`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        const podcastsData = data.feed.entry;
-        const foundPodcast = podcastsData.find(podcast => podcast.id.attributes['im:id'] === podcastId);
+        const foundPodcast = data.results[0];
 
         const episodesResponse = await fetch(`https://itunes.apple.com/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=20`);
         if (!episodesResponse.ok) {
@@ -43,12 +42,7 @@ function PodcastDetailsPage() {
   }, [podcastId]);
 
   if (!podcast) {
-    return (
-      <div>
-        <Header />
-        <LoadingSign />
-      </div>
-    );
+    return <Loading />
   }
 
   return (

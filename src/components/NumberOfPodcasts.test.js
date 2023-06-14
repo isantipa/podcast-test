@@ -1,12 +1,15 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
 import NumberOfPodcasts from './NumberOfPodcasts';
 
-test('Check if NumberOfPodcast renders and shows the correct number of podcast', () => {
-  const numberOfPodcasts = 5;
-  
-  render(<NumberOfPodcasts podcastsCount={numberOfPodcasts} />);
-  
-  const countElement = screen.getByText(numberOfPodcasts.toString());
-  expect(countElement).toBeInTheDocument();
-});
+describe('NumberOfPodcasts', () => {
+    it('renders without crashing', () => {
+        render(<NumberOfPodcasts podcastsCount={1} />);
+    });
 
+    it('renders the correct number of podcasts', () => {
+        render(<NumberOfPodcasts podcastsCount={1} />);
+        const countContainer = screen.getByTestId('numberofpodcasts-container');
+        expect(countContainer.textContent).toBe("1");
+    });
+});
