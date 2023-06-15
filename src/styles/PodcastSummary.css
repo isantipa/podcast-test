@@ -14,7 +14,9 @@
 
 .podcast-summary-container img {
     width: 200px;
+    height: 200px;
     border-radius: 2%;
+    object-fit: cover;
 }
 
 .podcast-details {
