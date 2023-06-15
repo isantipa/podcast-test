@@ -13,25 +13,14 @@ function EpisodeDetailsPage() {
   useEffect(() => {
     const fetchEpisodeData = async () => {
       try {
-        // Fetching episode data
-        const episodeResponse = await fetch(`https://itunes.apple.com/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=20`);
-        if (!episodeResponse.ok) {
-          throw new Error(`HTTP error! status: ${episodeResponse.status}`);
+        const response = await fetch(`https://itunes.apple.com/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=20`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const episodeData = await episodeResponse.json();
-        const foundEpisode = episodeData.results.find(ep => ep.trackId.toString() === episodeId);
+        const data = await response.json();
+        const foundEpisode = data.results.find(ep => ep.trackId.toString() === episodeId);
+
         setEpisode(foundEpisode);
-
-        // Fetching podcast data
-        // Assume API can fetch single podcast details
-        const podcastResponse = await fetch(`https://itunes.apple.com/lookup?id=${podcastId}`);
-        if (!podcastResponse.ok) {
-          throw new Error(`HTTP error! status: ${podcastResponse.status}`);
-        }
-        const podcastData = await podcastResponse.json();
-        const foundPodcast = podcastData.results[0];
-        setCurrentPodcast(foundPodcast);
-
       } catch (error) {
         console.error('There was an error!', error);
       }
@@ -39,6 +28,28 @@ function EpisodeDetailsPage() {
 
     fetchEpisodeData();
   }, [podcastId, episodeId]);
+
+  useEffect(() => {
+    if (episode) {
+      const fetchPodcastData = async () => {
+        try {
+          const response = await fetch('https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json');
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const data = await response.json();
+          const podcastsData = data.feed.entry;
+          const foundPodcast = podcastsData.find(podcast => podcast.id.attributes['im:id'] === podcastId);
+
+          setCurrentPodcast(foundPodcast);
+        } catch (error) {
+          console.error('There was an error!', error);
+        }
+      };
+
+      fetchPodcastData();
+    }
+  }, [episode, podcastId]);
 
   if (!episode || !currentPodcast) {
     return (
