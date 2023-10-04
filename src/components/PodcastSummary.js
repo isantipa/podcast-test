@@ -9,6 +9,7 @@ function PodcastSummary({ podcast }) {
   const summary = podcast?.summary?.label;
   const podcastId = podcast?.id?.attributes?.['im:id'];
 
+  //I didn't find a way to set the "text decoration none" correctly in the CSS so for now, its inline
   return (
     <div className="podcast-summary-container">
       <Link to={`/podcast/${podcastId}`} style={{ textDecoration: 'none' }}>
